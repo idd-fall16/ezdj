@@ -21,13 +21,13 @@ void setup() {
 
 void loop() {
 
-  pos_val = analogRead(pos);
+  int pos_val = analogRead(pos);
   Serial.printf("Position, %d\n", pos_val);
 
-  amp_val = analogRead(amp);
+  int amp_val = analogRead(amp);
   Serial.printf("Amplitude, %d\n", amp_val);
     
-  tamber_val = analogRead(tamber);
+  int tamber_val = analogRead(tamber);
   Serial.printf("Tamber, %d\n", tamber_val); 
   //note: what are the correct ranges?
   
