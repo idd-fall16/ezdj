@@ -9,28 +9,28 @@ SYSTEM_MODE(MANUAL);
 
 const int pos = A1;
 const int amp = A2;
-const int tamber = A3;
+const int timbre = A3;
 
 void setup() {
   Serial.begin(115200);
   pinMode(pos, INPUT);
   pinMode(amp, INPUT);
-  pinMode(tamber, INPUT);
+  pinMode(timbre, INPUT);
 
 }
 
 void loop() {
 
   int pos_val = analogRead(pos);
-  Serial.printf("Position, %d\n", pos_val);
+  Serial.printf("Position %d\n", pos_val);
 
   int amp_val = analogRead(amp);
-  Serial.printf("Amplitude, %d\n", amp_val);
+  Serial.printf("Amplitude %d\n", amp_val);
     
-  int tamber_val = analogRead(tamber);
-  Serial.printf("Tamber, %d\n", tamber_val); 
+  int timbre_val = analogRead(timbre);
+  Serial.printf("Timbre %d\n", timbre_val); 
   //note: what are the correct ranges?
-  
+  Serial.printf("Done \n");
   delay(1000);
     
   
