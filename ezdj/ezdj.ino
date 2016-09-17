@@ -10,28 +10,42 @@ SYSTEM_MODE(MANUAL);
 const int pos = A1;
 const int amp = A2;
 const int timbre = A3;
+const int mode = D1;
+bool pitch_mode = false;
+int old_amp = 0;
+const int amp_low = 3300; //low end of 'not pressed'
+const int amp_high = 3350; //high end of 'not pressed'
 
 void setup() {
   Serial.begin(115200);
-  pinMode(pos, INPUT);
+  pinMode(pos, INPUT_PULLDOWN);
   pinMode(amp, INPUT);
   pinMode(timbre, INPUT);
-
+  pinMode(mode, INPUT_PULLDOWN);
 }
 
 void loop() {
 
+  int mode_val = digitalRead(mode); 
+  Serial.printf("/switch %d\n", mode_val);
+  
   int pos_val = analogRead(pos);
-  Serial.printf("Position %d\n", pos_val);
-
-  int amp_val = analogRead(amp);
-  Serial.printf("Amplitude %d\n", amp_val);
+  Serial.printf("/position %d\n", pos_val);
     
+  int amp_val = analogRead(amp);
+  if (amp_val > amp_low && amp_val < amp_high) {
+    //user probably let go, remember old val instead
+    amp_val = old_amp;
+  } else { //update the 'old val' w the correct one
+    old_amp = amp_val;
+  }
+  Serial.printf("/amplitude %d\n", amp_val);
+  
   int timbre_val = analogRead(timbre);
-  Serial.printf("Timbre %d\n", timbre_val); 
+  Serial.printf("/timbre %d\n", timbre_val); 
   //note: what are the correct ranges?
   Serial.printf("Done \n");
-  delay(1000);
+  delay(1500);
     
   
 }
